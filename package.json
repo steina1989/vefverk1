@@ -1,0 +1,24 @@
+{
+  "name": "vef2-2018-v1",
+  "version": "1.0.0",
+  "description": "Útfæra skal Express vefþjón sem birtir yfirlit yfir greinar úr möppu á disk og möguleika á að lesa hverja grein.",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.16.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/steina1989/vefverk1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/steina1989/vefverk1/issues"
+  },
+  "homepage": "https://github.com/steina1989/vefverk1#readme"
+}

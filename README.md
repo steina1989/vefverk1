@@ -2,6 +2,7 @@
 
 Útfæra skal Express vefþjón sem birtir yfirlit yfir greinar úr möppu á disk og möguleika á að lesa hverja grein.
 
+
 ## Greinar
 
 Gefin er mappa með fjórum greinum ásamt myndum sem þær vísa í. Hver grein hefur skilgreind lýsigögn fremst í skjali skilgreint með _frontmatter_, t.d.
@@ -105,3 +106,37 @@ Sett verða fyrir tvö hópa verkefni þar sem hvort um sig gildir 15%, samtals 
 * https://unsplash.com/photos/xcQWMPm9fG8
 * https://unsplash.com/photos/E7RLgUjjazc
 * https://unsplash.com/photos/0gkw_9fy0eQ
+
+## Tillaga nemanda að arkitektúr
+
+Taka þarf tillit til tveggja aðstæðna: Uppkeyrsla vefþjóns, og keyrandi vefþjónn. 
+
+Þegar kveikt er á server eru gögn þess í óþekktu ástandi.
+MD eða HTML skrárnar gætu verið úreltar eða breytt af notendum með hærri aðgangsheimildir.
+
+Við uppkeyrslu á server mun því kerfið leita í möppunni /articles að skrám sem hafa .md endingu.
+
+Fyrir hverja skrá er leita að samsvarandi html skrá í möppunni /articles/html.
+
+Finnist html skráin er því næst athugað hvort hún hafi verið búin til eftir .md skránni tímalega séð.
+Sé það tilvikið þá þarf að keyra breyttu .md skrána gegnum þýðingu og yfirskrifa html útgáfuna.
+Annars þarf ekkert að gera.
+
+Í hinu tilfellinu, er vefþjónn keyrandi frá degi til dags.
+Lagt er til að hengja interrupt rútínu á atburðinn sem verður þegar skrám í möppunni articles er breytt. Þá þarf aðeins að gera nýja html útgáfu fyrir það skjal.
+
+Í báðum tilfellum þarf að hlusta á GET beiðnir frá ákveðinni slóð (sjá req.params).
+Sé tilsvarandi html skrár til er hún lesin inn og send til notanda.
+
+Kostir: Ekki þarf að bíða eftir renderingu á skjalinu
+
+Gallar: 
+Leysa þarf sérstaklega vandamál sem verða þegar .ejs fælar fyrir greinarnar eru uppfærðar. 
+Ef mjög margar greinar eru komnar í kerfið þarf að keyra render á allar md skrárnar, jafnvel þótt sumar þeirra er mögulega nánast aldrei beðið um..
+
+## Einföld útfærsla
+
+Þegar rótin er sótt þarf að sækja allar md skrár úr möppunni og sækja front matterið úr hverri þeirra.
+Listi af headerum er því næst raðað eftir dagsetningu, unnið er úr attributeum hvers fæls og síða er renderuð með þeim.
+
+Síðan hlustar einnig á ákveðna undirslóð og notar req.params til að athuga hvort beðið sé um grein sem er til í /articles. Sé hún til þá er hún send inn í front-matter og showdown. Body-ið úr showdown útkomunni er svo sent á template vélina og html útgáfa greinarinnar er skilað.

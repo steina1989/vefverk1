@@ -1,0 +1,26 @@
+<%- include('header') -%>
+  <div class="flex-container">
+    <% articles.forEach(function(fm) { %>
+      <div class="articleitems">
+        <div>
+          <span>
+            <a href=articles/<%= fm.slug %>>
+              <img src=/articles/<%= fm.image%>>
+            </a>
+          </span>
+          <br>
+          <span>
+            <a href=articles/<%= fm.slug %> >
+              <%= fm.title%>
+            </a>
+          </span>
+          <span>
+            <div>
+              <%= fm.date %>
+            </div>
+          </span>
+        </div>
+      </div>
+      <% }); %>
+  </div>
+  <%- include('footer') -%>

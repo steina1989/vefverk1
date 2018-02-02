@@ -1,12 +1,111 @@
-* {
-  margin: 0;
+@import url('https://fonts.googleapis.com/css?family=Lora|Roboto');
+
+*{
+  margin : 0;
   padding: 0;
 }
 
+/* Globals */
 html {
   box-sizing: border-box;
 }
+body {
+  font-family: 'Lora', serif;
+  background-color : green;/* #eee;*/
+  line-height: 30px;
+}
+h1,h2,h3,a {
+  color : #333;
+  font-family : 'Roboto',serif;
+}
+h3 {
+  font-size: 24px;
+}
+h2 {
+  font-size: 32px;
+}
+h1 {
+  font-size: 48px;
+}
+a {
+  font-weight: bold;
+  font-size: 24px;
+  text-decoration: none;
+}
+
+/* Article Section */
+
+.article-container {
+  margin-top: 30px;
+  margin : auto;
+  text-align: center;
+}
+.article {
+  margin: auto;
+  display: inline-block;
+  text-align: left;
+  width: 100%;
+}
+.article img{
+  width : 100%;
+}
+
+blockquote {
+  font-family: 'Lora', serif;
+  font-style: italic;
+}
+
+/* Header Section */
+
+.header {
+  background-image: url("header.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #eee;
+  width: 99.2vw;
+  height: 40vh;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  margin-bottom: 15px;
+  font-family : 'Roboto',serif;
+  font-size: 48px;
+  font-weight: bold;
+}
+.headline {
+  margin: auto;
+}
+
+
+/* Frontpage Section */
+.flex-container {
+  margin : auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap : wrap;
+  justify-content: space-around;
+  max-width: 1200px;
+}
+
+.articleitems {
+  width: 50%;
+  padding: 20px;
+  background-color : blue;
+}
+.articleitems img{
+  width: auto;
+  max-width: 100%;
+}
+
 
 *, *:before, *:after {
   box-sizing: inherit;
+}
+
+@media only screen and (max-width: 600px){
+  .articleitems {
+    width: 100%;
+
+  }
 }

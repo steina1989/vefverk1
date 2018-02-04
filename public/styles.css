@@ -42,7 +42,7 @@ a {
 
 .article-container {
   margin-top: 30px;
-   margin : auto; 
+  margin : auto; 
   text-align: center;
 }
 .article {
@@ -97,6 +97,7 @@ blockquote {
   width: 50%;
   padding: 20px;
   background-color : #eee;
+  align-self: baseline;
 }
 
 .articleitems img{
@@ -111,7 +112,6 @@ blockquote {
   max-height: 100%;
   width : 50vw;
   max-width: 100%;
-
 }
 
 *, *:before, *:after {

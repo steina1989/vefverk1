@@ -2,11 +2,10 @@
   <div class="flex-container">
     <% articles.forEach(function(fm) { %>
       <div class="articleitems">
-        <div>
           <span>
-            <a href=articles/<%= fm.slug %>>
-              <% if (fm.image) { %> 
-              <img src=/articles/<%= fm.image%>>
+            <a href=articles/<%= fm.attributes.slug %>>
+              <% if (fm.attributes.image) { %> 
+              <img src=/articles/<%= fm.attributes.image%>>
               <%} else { %>
                 <img src=/static/blank.jpg>
               <% } %>
@@ -15,15 +14,14 @@
           <br>
           <span>
             <a href=articles/<%= fm.slug %> >
-              <%= fm.title%>
+              <%= fm.attributes.title%>
             </a>
           </span>
           <span>
             <div>
-              <%= fm.date %>
+              <%= fm.prettydate %>
             </div>
           </span>
-        </div>
       </div>
       <% }); %>
   </div>

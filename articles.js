@@ -37,9 +37,9 @@ app.get('/articles/:slug', async (req, res) => {
   const promises = filelist.map(async value => read(`./articles/${value}`));
 
   let found = false;
-  Promise.all(promises).then((filelist) => {
-    for (let i = 0; i < filelist.length; i += 1) {
-      const fm = filelist[i];
+  Promise.all(promises).then((result) => {
+    for (let i = 0; i < result.length; i += 1) {
+      const fm = result[i];
       const fileslug = fm.attributes.slug;
       if (req.params.slug === fileslug) {
         const html = converter.makeHtml(fm.body);
@@ -70,8 +70,7 @@ app.get('/', async (req, res) => {
 
     for (let i = 0; i < fmlist.length; i += 1) {
       const date = new Date(fmlist[i].attributes.date);
-      fmlist[i].attributes.date = date.toDateString();
-      attrList.push(fmlist[i].attributes);
+      attrList.push({ attributes: fmlist[i].attributes, prettydate: date.toDateString() });
     }
     res.render('frontpage.ejs', { articles: attrList, title: 'Greinasafn' });
   });
@@ -83,10 +82,11 @@ app.use((req, res) => {
   res.render('error', { title: 'Fannst ekki.', error: 'Efnið fannst ekki.' });
 });
 
- // Handle 500
- app.use(function(error, req, res, next) {
-    res.render('error',{title : "Obbossí",error : "Eitthvað fór úrskeiðis."})
- });
+// Handle 500
+app.use((error, req, res) => {
+  res.render('error', { title: 'Obbossí', error: 'Eitthvað fór úrskeiðis.' });
+  console.error(error);
+});
 
 // Exports
 module.exports = app;

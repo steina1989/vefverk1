@@ -83,10 +83,10 @@ app.use((req, res) => {
   res.render('error', { title: 'Fannst ekki.', error: 'Efnið fannst ekki.' });
 });
 
-//  // Handle 500
-//  app.use(function(error, req, res, next) {
-//     res.render('error',{title : "Obbossí",error : "Eitthvað fór úrskeiðis."})
-//  });
+ // Handle 500
+ app.use(function(error, req, res, next) {
+    res.render('error',{title : "Obbossí",error : "Eitthvað fór úrskeiðis."})
+ });
 
 // Exports
 module.exports = app;

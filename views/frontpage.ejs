@@ -5,7 +5,13 @@
         <div>
           <span>
             <a href=articles/<%= fm.slug %>>
+              <% if (fm.image) { %> 
               <img src=/articles/<%= fm.image%>>
+              <%} else { %>
+                <div class="image-placeholder">
+                    <p>fff</p>
+                </div>
+              <% } %>
             </a>
           </span>
           <br>
@@ -24,3 +30,4 @@
       <% }); %>
   </div>
   <%- include('footer') -%>
+

@@ -24,6 +24,7 @@ app.get('/articles/:slug', async (req, res) => {
     var filelist = await readdir('./articles');
     filelist = filelist.filter(item => item.endsWith('.md'))
 
+    let found = false;
     for(var i = 0; i < filelist.length; i++){
         const data = await read('./articles/' + filelist[i]);
         const fm = frontmatter(data);
@@ -31,9 +32,13 @@ app.get('/articles/:slug', async (req, res) => {
         if (req.params.slug === fileslug){
             let html = converter.makeHtml(fm.body)
             res.render('article', {html, title: fm.attributes.title});
+            found = true;
         }
     }
-    res.status(404);    
+    if (!found){
+        res.status(404).render('error',{title : "Fannst ekki.",error : "Efnið fannst ekki."});
+    }
+
 });
 
 app.get('/', async (req, res) => {
@@ -63,10 +68,21 @@ async function sort(attrlist){
     })
 }
 
+
 async function read(file) {
     const data = await readFile(file);
     return data.toString();
 }
+
+  // Handle 404
+  app.use(function(req, res) {
+    res.render('error',{title : "Fannst ekki.",error : "Efnið fannst ekki."});
+ });
+ 
+//  // Handle 500
+//  app.use(function(error, req, res, next) {
+//     res.render('error',{title : "Obbossí",error : "Eitthvað fór úrskeiðis."})
+//  });
 
 // Exports
 module.exports = app
